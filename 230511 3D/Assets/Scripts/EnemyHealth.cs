@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class EnemyHealth : MonoBehaviour
 {
+
     float MaxHealth = 100;
     float currentHealth = 100;
     ParticleSystem hitParticle;
@@ -29,6 +30,10 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<SphereCollider>().enabled = false;
+
+        UIManager.current.Addscore((int)MaxHealth);
+
     }
 
     void StartSinking()

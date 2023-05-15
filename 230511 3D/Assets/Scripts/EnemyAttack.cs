@@ -28,7 +28,8 @@ public class EnemyAttack : MonoBehaviour
             PlayerInRange = false;
         }
     }
-    float AttackDamage = 10f;
+    [SerializeField]
+    float AttackDamage = 20f;
     float timeBetweenAttacks = 0.5f;
     float timer = 0f;
 

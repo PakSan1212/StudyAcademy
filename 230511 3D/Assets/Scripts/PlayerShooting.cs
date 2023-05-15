@@ -7,6 +7,7 @@ public class PlayerShooting : MonoBehaviour
     ParticleSystem gunParticle;
     Light gunLight;
     LineRenderer gunLine;
+    int shootableMask;
     void Start()
     {
         gunLine = GetComponent<LineRenderer>();
@@ -14,6 +15,7 @@ public class PlayerShooting : MonoBehaviour
 
         gunParticle = GetComponent<ParticleSystem>();
         gunLight = GetComponent<Light>();
+        shootableMask = LayerMask.GetMask("Shootable");
     }
     float timer = 0f;
     float timeBetweenBullet = 0.2f;
@@ -33,7 +35,8 @@ public class PlayerShooting : MonoBehaviour
                 ShootRay.origin = transform.position;
                 ShootRay.direction = transform.forward;
                 gunLine.SetPosition(0, ShootRay.origin);
-                if (Physics.Raycast(ShootRay, out ShootHit, range))
+
+                if (Physics.Raycast(ShootRay, out ShootHit, range, shootableMask))
                 {
                     EnemyHealth health = ShootHit.collider.GetComponent<EnemyHealth>();
                     if(health != null)
